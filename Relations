@@ -1,0 +1,92 @@
+Create Table Dept (
+  DeptNo int Primary Key,
+  DeptName varchar(20) not null,
+  Location varchar(20) not null,
+  Capacity int not null
+) 
+
+insert into Dept values(10, 'IT', 'Pune-Hinjewadi', 100)
+insert into Dept values(20, 'HR', 'Pune-Kharadi', 10)
+insert into Dept values(30, 'AD', 'Pune-Kothrud', 30)
+insert into Dept values(40, 'TR', 'Pune-Bavdhan', 4)
+insert into Dept values(50, 'TP', 'Pune-Bavdhan', 50)
+insert into Dept values(60, 'SL', 'Pune-Bavdhan', 40)
+
+-- create an emp table having the DeptNo as Foreign Key
+Create Table Emp (
+  EmpNo int Primary key,
+  EmpName varchar(100) not null,
+  Salary int not null,
+  Designation varchar(200) not null,
+  DeptNo int not null references Dept(DeptNo) -- DeptNo is now the Forfeign Key
+)
+
+insert into Emp values(101, 'Sachin', 12000, 'Manager', 10)
+insert into Emp values(102, 'Saurav', 22000, 'Manager', 20)
+insert into Emp values(103, 'Rahul', 62000, 'Manager', 30)
+insert into Emp values(104, 'Veerendra', 78000, 'Manager', 40)
+insert into Emp values(105, 'Virat', 35000, 'Manager', 10)
+insert into Emp values(106, 'Ishan', 78000, 'Manager', 20)
+insert into Emp values(107, 'Rohit', 23000, 'Manager', 30)
+insert into Emp values(108, 'Zahir', 54000, 'Manager', 40)
+insert into Emp values(109, 'Amit', 13000, 'Manager', 10)
+insert into Emp values(110, 'Surya', 89000, 'Manager', 20)
+insert into Emp values(111, 'Ashok', 49000, 'Manager', 30)
+insert into Emp values(112, 'Vijay', 38000, 'Manager', 40)
+
+
+-- Update the Capacity of the Department TR to 10
+
+-- UPDATE <TABLE-NAME> SET <COLUMN-NAME>= <NEW_VALUE> <COMMA-SEPERATED-LIST-OF-COLUMNS-EQUATED-WITH-NEW-VALUE>
+-- WHERE <CONDITION>
+
+Update Dept set Capacity=10 where DeptName ='TR'
+
+-- DELETE the record (RECORD CANOOT BE DELETED IF IT IS USED as Foreign Key in other table and having record for the foreign key values in child table)
+Delete Dept where DeptNo =50
+
+-- Multi-Row updates
+-- Udpate salary of all IT Employees by 20%
+Update Emp set Salary=Salary + (Salary * 0.2) where DeptNo =10
+
+-- Read Data from Dept and Emp table with information like EmpNo, EmpName, DeptName, Designation,Salary
+-- combine data in  select query by equating the DeptNo
+-- Note--> If Column present in both tables, then make sure that, the query refers column with the table name
+
+select EmpNo, EmpName, DeptName, Designation, Salary, Dept.DeptNo 
+from  Dept,Emp
+where Dept.DeptNo = Emp.DeptNo
+
+-- Sum of Salary Group by DeptName Crating alias for the sum(Salary)
+Select DeptName, Sum(Salary) as Salary from Emp,Dept
+where Emp.DeptNo = Dept.DeptNo
+Group by (DeptName)
+
+-- Dynamic ganaration of columns in select query
+select EmpNo, EmpName, Designation, DeptName, Salary, Salary*0.2 as Tax
+from Dept, Emp
+Where Dept.DeptNo = Emp.DeptNo
+
+-- Select query for selecting sepcific data in range of values of column from the table
+-- List out elpmoyees having salary between 30000 to 50000
+select * from Emp  where Salary Between 30000 and 50000
+
+-- Select query for selecting data in specific values 
+-- select  employees having salary in 12000, 42000, 38000 
+-- using IN operator equivalent of using multiple OR conditions
+select * from Emp where Salary In(12000, 38000,49000,42000,54000)
+
+select * from Emp
+where Salary = 12000 or Salary =38000 or Salary =42000
+
+ 
+
+
+
+
+
+
+
+
+
+
