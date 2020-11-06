@@ -1,0 +1,12 @@
+select PersonName, Age,DeptName,Designation from Person 
+INNER JOIN  Employee 
+ON Person.PersonId = Employee.PersonId
+
+
+-- if for the data form Left table (Person) there are no matching record on right table (Employee)
+-- the records for right table (Employee) will be NULL
+select PersonName, Age,DeptName,Designation from Person 
+LEFT JOIN  Employee 
+ON Person.PersonId = Employee.PersonId
+
+
