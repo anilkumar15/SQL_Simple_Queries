@@ -1,0 +1,82 @@
+-- use ExpensesRHeal
+
+-- crerating table
+Create Table PersonInfo (
+  PersonId int Primary Key,
+  PersonName varchar(10),
+  Address varchar (200),
+  Age int 
+)
+
+-- alter the table by adding new column of name Email
+-- also setting not null constraints for PersonName, Address, Age
+
+alter table PersonInfo add Email varchar(100) not null
+
+alter table PersonInfo
+alter column Age int not null
+-- if the table contains data
+-- then new column added in it must be 
+-- added that can contain nulls, or have a 
+--DEFAULT definition specified, or the column being added 
+--is an identity or timestamp column, 
+ 
+alter table PersonInfo add City varchar(100) 
+-- if the table contains data then a column 
+-- whihc was nullbale can be made as not null
+-- later on
+alter table PersonInfo alter column City varchar(100) not null
+--the column containg data can be altered to nullble
+alter table PersonInfo alter column Email varchar(100) null
+
+alter table PersonInfo alter column Email varchar(100) not null
+
+-- insert records in PersonInfo Table
+insert into PersonInfo values (102, 'Ajay', 'Kothrud', 34, 'a.b@msit.com', 'Pune' )
+insert into PersonInfo values (103, 'Aksah', 'Kalanagar', 35, 'a.c@msit.com', 'Mumai' )
+insert into PersonInfo values (104, 'Binod', 'Undri', 37, 'a.d@msit.com', 'Mumbai' )
+insert into PersonInfo values (105, 'Brijesh', 'BK Nagar', 14, 'a.e@msit.com', 'Kolhapur' )
+insert into PersonInfo values (106, 'Chaitanya', 'Kothrud', 54, 'a.f@msit.com', 'Kolhapur' )
+insert into PersonInfo values (107, 'Chinmay', 'Shivaji Nagar', 34, 'a.g@msit.com', 'Sangali' )
+insert into PersonInfo values (108, 'Deepak', 'Shambhaji Nagar', 76, 'a.h@msit.com', 'Sangali' )
+insert into PersonInfo values (109, 'Dhiraj', 'Rajaram Naghar', 67, 'a.i@msit.com', 'Yavatmal' )
+insert into PersonInfo values (110, 'Eshwar', 'Kothrud', 39, 'a.j@msit.com', 'Pune' )
+
+-- thye Select Query
+-- syntax
+
+-- for Select query 
+-- SELECT <COLUMNS_SEPARATED_BY_COMMA> | * FROM <TABLE_NAME>
+-- WHERE <CONDITIONS and | or | not| > | < | = | != | LIKE '%<CHARACTER>'>
+-- ORDER BY <COLUMN-NAME> ASC (default)  | DESC
+-- GROUP BY <COLUMN-NAME>
+
+-- Listing all records
+select * from PersonInfo
+
+-- list only persons from Pune
+
+select PersonId, PersonName,Age,City from PersonInfo where City='Pune'
+
+-- list Persons from Pune age more than equal to 40
+select PersonId, PersonName,Age,City from PersonInfo where City='Pune' and Age >=40
+
+-- select records from PersonInfo Order by PersonName ascending (default)
+select * from PersonInfo order by PersonName ASC
+-- select records from PersonInfo Order by PersonName descending  
+select * from PersonInfo order by PersonName DESC
+
+-- combining where with order by
+select * from PersonInfo where City= 'Pune' order by PersonName DESC
+
+
+
+
+
+
+
+
+
+
+
+
